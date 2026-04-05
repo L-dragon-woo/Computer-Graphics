@@ -10,10 +10,10 @@ The original image used throughout the report is shown below.
 
 ## Notebook Files
 
-1. `histogram_image_enhancement.ipynb`
-2. `arithmetic_operations.ipynb`
-3. `logical_operations.ipynb`
-4. `morphological_operations.ipynb`
+1. `1_histogram_image_enhancement.ipynb`
+2. `2_arithmetic_operations.ipynb`
+3. `3_logical_operations.ipynb`
+4. `4_morphological_operations.ipynb`
 
 ## 1. Histogram-Based Image Enhancement
 
@@ -27,11 +27,11 @@ This experiment enhances the grayscale version of the input image using three hi
 
 The following figure compares the original grayscale image with the three enhanced outputs.
 
-![Enhancement Comparison](results/enhancement_comparison.png)
+![Enhancement Comparison](results/1_enhancement_comparison.png)
 
 The next figure shows how each method changes the distribution of pixel intensities.
 
-![Histogram Comparison](results/histogram_comparison.png)
+![Histogram Comparison](results/1_histogram_comparison.png)
 
 ### Quantitative Evaluation
 
@@ -58,7 +58,7 @@ For a clear demonstration, addition and subtraction use a constant offset image 
 
 ### Result Image
 
-![Arithmetic Operations](results/arithmetic_operations.png)
+![Arithmetic Operations](results/2_arithmetic_operations.png)
 
 ### Intensity Summary
 
@@ -86,7 +86,7 @@ The grayscale selfie image is first converted to a binary image using Otsu thres
 
 ### Result Image
 
-![Logical Operations](results/logical_operations.png)
+![Logical Operations](results/3_logical_operations.png)
 
 ### White Pixel Ratio
 
@@ -115,7 +115,7 @@ To make the effect easier to observe, a small amount of salt-and-pepper noise is
 
 ### Result Image
 
-![Morphological Operations](results/morphological_operations.png)
+![Morphological Operations](results/4_morphological_operations.png)
 
 ### White Pixel Ratio
 
