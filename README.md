@@ -1,44 +1,39 @@
-# Histogram-Based Image Enhancement
+# Computer Graphics Image Processing Report
 
-This project applies three histogram-based enhancement methods to `selfie.jpg` and compares their visual and quantitative effects on the grayscale image.
+This repository contains four separate notebook files that demonstrate core image processing techniques using `selfie.jpg`.
 
-The notebook used for the experiment is `histogram_image_enhancement.ipynb`.
+## Input Image
 
-## Original Image
-
-The original input image used in this project is shown below.
+The original image used throughout the report is shown below.
 
 ![Original Image](selfie.jpg)
 
-## Methods
+## Notebook Files
 
-The following techniques were applied:
+1. `histogram_image_enhancement.ipynb`
+2. `arithmetic_operations.ipynb`
+3. `logical_operations.ipynb`
+4. `morphological_operations.ipynb`
+
+## 1. Histogram-Based Image Enhancement
+
+This experiment enhances the grayscale version of the input image using three histogram-based methods:
 
 - Histogram Equalization
 - Adaptive Histogram Equalization (AHE)
 - Contrast Limited Adaptive Histogram Equalization (CLAHE)
 
-Each method was evaluated against the original grayscale image using:
+### Result Images
 
-- SSIM
-- PSNR
-- MSE
-
-## Result Images
-
-### Image Comparison
-
-The figure below compares the original grayscale image used for processing with the three enhanced results.
+The following figure compares the original grayscale image with the three enhanced outputs.
 
 ![Enhancement Comparison](results/enhancement_comparison.png)
 
-### Histogram Comparison
-
-The figure below shows how each method redistributes pixel intensities.
+The next figure shows how each method changes the distribution of pixel intensities.
 
 ![Histogram Comparison](results/histogram_comparison.png)
 
-## Quantitative Results
+### Quantitative Evaluation
 
 | Method | SSIM | PSNR | MSE |
 | --- | ---: | ---: | ---: |
@@ -46,14 +41,97 @@ The figure below shows how each method redistributes pixel intensities.
 | Adaptive Histogram Equalization | 0.3000 | 9.3176 | 7608.9343 |
 | CLAHE | 0.8795 | 19.3203 | 760.4154 |
 
-## Discussion
+### Discussion
 
-Histogram Equalization improves global contrast and spreads intensity values across a wider range. In the result image, the face and background become more separated, and the histogram is much more evenly distributed than the original. Its high SSIM and relatively low MSE indicate that it enhances contrast while still preserving the original structure reasonably well.
+Histogram Equalization improves global contrast and gives the best similarity-based scores relative to the original grayscale image. AHE produces the strongest local enhancement, but it also changes the image the most and introduces the largest distortion. CLAHE offers the best visual balance because it improves local contrast while suppressing excessive amplification.
 
-Adaptive Histogram Equalization produces the strongest local contrast enhancement. Fine details become more visible, but the image also looks much harsher and less natural. This is reflected in the histogram and in the metrics: AHE has the lowest SSIM, the lowest PSNR, and the highest MSE, which means it changes the original image the most.
+## 2. Arithmetic Operations on Images
 
-CLAHE balances enhancement and stability. It improves local contrast like AHE, but limits over-amplification in homogeneous regions. In the result image, CLAHE preserves facial structure better than AHE and avoids excessive noise boosting. Its SSIM and PSNR are lower than standard histogram equalization but much better than AHE, making it the most visually balanced method for this image.
+This section applies four arithmetic operations to the grayscale image:
+
+- Addition
+- Subtraction
+- Multiplication
+- Division
+
+For a clear demonstration, addition and subtraction use a constant offset image of `50`, while multiplication and division use a horizontal scale map ranging from `0.5` to `1.5`.
+
+### Result Image
+
+![Arithmetic Operations](results/arithmetic_operations.png)
+
+### Intensity Summary
+
+| Image | Mean Intensity |
+| --- | ---: |
+| Original | 111.42 |
+| Addition | 155.59 |
+| Subtraction | 66.10 |
+| Multiplication | 115.22 |
+| Division | 109.89 |
+
+### Discussion
+
+Addition brightens the entire image and shifts intensities upward. Subtraction darkens the image and suppresses low-intensity regions. Multiplication changes contrast according to the scale map, which makes one side darker and the other side brighter. Division produces the inverse effect of multiplication and redistributes brightness in the opposite direction.
+
+## 3. Logical Operations on Images
+
+This section performs logical operations on binary images:
+
+- AND
+- OR
+- NOT
+
+The grayscale selfie image is first converted to a binary image using Otsu thresholding. A filled ellipse mask is then used as the second operand for the logical operations.
+
+### Result Image
+
+![Logical Operations](results/logical_operations.png)
+
+### White Pixel Ratio
+
+| Image | White Pixel Ratio |
+| --- | ---: |
+| Binary Image (A) | 0.3638 |
+| Ellipse Mask (B) | 0.2621 |
+| A AND B | 0.0985 |
+| A OR B | 0.5273 |
+| NOT A | 0.6362 |
+
+### Discussion
+
+The AND operation preserves only the overlapping foreground region between the thresholded image and the ellipse mask. OR combines the foreground areas from both images and therefore produces the largest visible region. NOT inverts the binary image, swapping foreground and background completely.
+
+## 4. Morphological Operations
+
+This section demonstrates four morphological operations on a binary image:
+
+- Dilation
+- Erosion
+- Opening
+- Closing
+
+To make the effect easier to observe, a small amount of salt-and-pepper noise is added to the thresholded binary image before applying the operations. A `5 x 5` rectangular structuring element is used.
+
+### Result Image
+
+![Morphological Operations](results/morphological_operations.png)
+
+### White Pixel Ratio
+
+| Image | White Pixel Ratio |
+| --- | ---: |
+| Original Binary Mask | 0.3638 |
+| Noisy Binary Mask | 0.3665 |
+| Dilation | 0.5308 |
+| Erosion | 0.2589 |
+| Opening | 0.3471 |
+| Closing | 0.3839 |
+
+### Discussion
+
+Dilation expands the white foreground regions, while erosion shrinks them. Opening removes small bright noise and smooths thin protrusions, so the white ratio decreases slightly. Closing fills small gaps and holes inside the foreground, which increases the white ratio compared with the noisy mask.
 
 ## Conclusion
 
-For `selfie.jpg`, standard histogram equalization gives the best similarity-based scores, while CLAHE provides the most practical visual tradeoff between contrast improvement and artifact control. AHE enhances local detail aggressively, but it also introduces the largest distortion relative to the original image.
+The four notebooks cover contrast enhancement, arithmetic image manipulation, logical mask-based processing, and morphological shape processing. Together, they show how the same input image can be analyzed and transformed through different classes of image processing operations for both visual interpretation and structural manipulation.
