@@ -1,6 +1,6 @@
 # Computer Graphics Image Processing Report
 
-This repository contains four separate notebook files that demonstrate core image processing techniques using `selfie.jpg`.
+This repository contains five separate notebook files that demonstrate core image processing and image classification techniques.
 
 ## Input Image
 
@@ -14,6 +14,7 @@ The original image used throughout the report is shown below.
 2. `2_arithmetic_operations.ipynb`
 3. `3_logical_operations.ipynb`
 4. `4_morphological_operations.ipynb`
+5. `5_cifar10_knn_l1_l2.ipynb`
 
 ## 1. Histogram-Based Image Enhancement
 
@@ -132,6 +133,27 @@ To make the effect easier to observe, a small amount of salt-and-pepper noise is
 
 Dilation expands the white foreground regions, while erosion shrinks them. Opening removes small bright noise and smooths thin protrusions, so the white ratio decreases slightly. Closing fills small gaps and holes inside the foreground, which increases the white ratio compared with the noisy mask.
 
+## 5. CIFAR-10 KNN Classification
+
+This section classifies CIFAR-10 images with a KNN classifier and compares two distance metrics:
+
+- L1 distance (Manhattan distance)
+- L2 distance (Euclidean distance)
+
+The notebook flattens each `32 x 32 x 3` image into a pixel vector, predicts labels with KNN, and compares accuracy across multiple `k` values.
+
+### Result Images
+
+Running the notebook saves the following outputs:
+
+- `results/5_cifar10_samples.png`
+- `results/5_cifar10_knn_l1_l2_accuracy.png`
+- `results/5_cifar10_knn_decision_regions.png`
+
+### Discussion
+
+L1 distance sums absolute pixel differences, while L2 distance gives larger weight to large pixel differences. Because CIFAR-10 images contain object position, background, and color variation, simple pixel-based KNN has limited accuracy compared with feature-based or neural-network methods. The comparison table and accuracy plot in the notebook show which distance metric performs better for the selected sample size and `k` values. The notebook also projects image vectors to two PCA dimensions and visualizes KNN decision regions for L1 and L2.
+
 ## Conclusion
 
-The four notebooks cover contrast enhancement, arithmetic image manipulation, logical mask-based processing, and morphological shape processing. Together, they show how the same input image can be analyzed and transformed through different classes of image processing operations for both visual interpretation and structural manipulation.
+The notebooks cover contrast enhancement, arithmetic image manipulation, logical mask-based processing, morphological shape processing, and CIFAR-10 image classification with KNN. Together, they show how images can be transformed, analyzed, and classified with different computer vision techniques.
