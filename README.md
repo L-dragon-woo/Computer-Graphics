@@ -144,11 +144,17 @@ The notebook flattens each `32 x 32 x 3` image into a pixel vector, predicts lab
 
 ### Result Images
 
-Running the notebook saves the following outputs:
+The following figure shows sample CIFAR-10 images used in the experiment.
 
-- `results/5_cifar10_samples.png`
-- `results/5_cifar10_knn_l1_l2_accuracy.png`
-- `results/5_cifar10_knn_decision_regions.png`
+![CIFAR-10 Samples](results/5_cifar10_samples.png)
+
+The next figure compares KNN accuracy for L1 and L2 distance across different `k` values.
+
+![CIFAR-10 KNN L1 L2 Accuracy](results/5_cifar10_knn_l1_l2_accuracy.png)
+
+The final figure visualizes KNN decision regions after projecting CIFAR-10 image vectors to two PCA dimensions.
+
+![CIFAR-10 KNN Decision Regions](results/5_cifar10_knn_decision_regions.png)
 
 ### Discussion
 
