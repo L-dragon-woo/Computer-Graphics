@@ -1,6 +1,6 @@
 # Computer Graphics Image Processing Report
 
-This repository contains five separate notebook files that demonstrate core image processing and image classification techniques.
+This repository contains six separate notebook files that demonstrate core image processing and image classification techniques.
 
 ## Input Image
 
@@ -15,6 +15,7 @@ The original image used throughout the report is shown below.
 3. `3_logical_operations.ipynb`
 4. `4_morphological_operations.ipynb`
 5. `5_cifar10_knn_l1_l2.ipynb`
+6. `6_cifar10_linear_classification.ipynb`
 
 ## 1. Histogram-Based Image Enhancement
 
@@ -160,6 +161,32 @@ The final figure visualizes KNN decision regions after projecting CIFAR-10 image
 
 L1 distance sums absolute pixel differences, while L2 distance gives larger weight to large pixel differences. Because CIFAR-10 images contain object position, background, and color variation, simple pixel-based KNN has limited accuracy compared with feature-based or neural-network methods. The comparison table and accuracy plot in the notebook show which distance metric performs better for the selected sample size and `k` values. The notebook also projects image vectors to two PCA dimensions and visualizes KNN decision regions for L1 and L2.
 
+## 6. CIFAR-10 Linear Classification
+
+This section trains a softmax linear classifier on CIFAR-10 images. Each image is flattened into a `3072`-dimensional vector, and the model learns class scores with a weight matrix and bias vector.
+
+### Result Images
+
+The following figure shows sample CIFAR-10 images used in the linear classification experiment.
+
+![CIFAR-10 Linear Samples](results/6_cifar10_linear_samples.png)
+
+The next figure shows the softmax loss and train/test accuracy during gradient descent.
+
+![CIFAR-10 Linear Training Curves](results/6_cifar10_linear_training_curves.png)
+
+The following figure visualizes the learned class weights as image-like templates.
+
+![CIFAR-10 Linear Weights](results/6_cifar10_linear_weights.png)
+
+The final figure visualizes linear classifier decision regions after projecting CIFAR-10 image vectors to two PCA dimensions.
+
+![CIFAR-10 Linear Decision Regions](results/6_cifar10_linear_decision_regions.png)
+
+### Discussion
+
+The linear classifier computes class scores with a single matrix multiplication. Unlike KNN, which compares each test sample with stored training samples, the linear classifier learns parameters during training and predicts quickly after training. Because CIFAR-10 contains complex object shapes, backgrounds, and color variations, a simple linear boundary is limited, but the training curves, weight templates, and PCA decision region plot make the model behavior easy to inspect.
+
 ## Conclusion
 
-The notebooks cover contrast enhancement, arithmetic image manipulation, logical mask-based processing, morphological shape processing, and CIFAR-10 image classification with KNN. Together, they show how images can be transformed, analyzed, and classified with different computer vision techniques.
+The notebooks cover contrast enhancement, arithmetic image manipulation, logical mask-based processing, morphological shape processing, CIFAR-10 image classification with KNN, and CIFAR-10 linear classification. Together, they show how images can be transformed, analyzed, and classified with different computer vision techniques.
